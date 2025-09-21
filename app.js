@@ -293,7 +293,7 @@ async function watcher() {
 
     const myntraData = await fetchMyntraPage();
     // const goldPrice = await fetchGoldPrice();
-
+    console.log("myntraData", myntraData);
     if (!myntraData) return;
     if (myntraData.isBlinkDealFound) {
         await sendEmailAlert(myntraData,1);
