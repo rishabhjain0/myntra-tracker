@@ -141,6 +141,7 @@ async function fetchMyntraPage() {
         let isScriptWorking = true;
         const data = await fetchHtmlpageViaLink(MYNTRA_URL);
         console.log("myntra url", MYNTRA_URL);
+        console.log("data", data);
         const $ = cheerio.load(data);
         const bodyText = $("body").text();
         // saveMyntraHTML(bodyText);
