@@ -1,10 +1,22 @@
 // app.js
 require('dotenv').config();
+const express = require("express");
 const axios = require("axios");
 const cheerio = require("cheerio");
 const fs = require("fs");
 const path = require("path");
 const nodemailer = require("nodemailer");
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+
+app.get("/", (req, res) => res.send("Worker running!"));
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+
+
 
 // Myntra URL
 const MYNTRA_URL = "https://www.myntra.com/gold-coin?f=Brand%3AKalyan%20Jewellers";
