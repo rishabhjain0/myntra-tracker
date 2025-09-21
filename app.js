@@ -140,16 +140,17 @@ async function fetchMyntraPage() {
         let isBlinkDealFound = false;
         let isScriptWorking = true;
         const data = await fetchHtmlpageViaLink(MYNTRA_URL);
+        console.log("myntra url", MYNTRA_URL);
         const $ = cheerio.load(data);
         const bodyText = $("body").text();
         // saveMyntraHTML(bodyText);
-
+        console.log("bodyText", bodyText);
         const startRegex = /{"landingPageUrl":/g;
         let match;
         let products = [];
 
         isBlinkDealFound = searchBlinkdeal(bodyText);
-
+        console.log("startRegex", startRegex);
         while ((match = startRegex.exec(bodyText)) !== null) {
             let startIndex = match.index;
             let braceCount = 0;
@@ -166,8 +167,9 @@ async function fetchMyntraPage() {
             }
 
             const jsonStr = bodyText.slice(startIndex, endIndex);
-
+            console.log("jsonStr", jsonStr);
             try {
+
                 const obj = JSON.parse(jsonStr);
                 if (obj.productId) {
                     products.push(obj);
@@ -176,7 +178,7 @@ async function fetchMyntraPage() {
                 // skip invalid
             }
         }
-
+        console.log("products", products);
         if (products?.length == 0) {
             isScriptWorking = false;
         }
